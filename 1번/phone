@@ -1,0 +1,11 @@
+if [ $# -eq 0 ]
+then
+	echo "You didn't tell me what you want to search for."
+	exit
+fi
+
+pattern=$(echo "$@" | tr " " "|")
+
+egrep -i "($pattern)" mydata.txt |
+awk 'BEGIN {FS="|"} {print "----> \nname: " $1"\naddress: " $2"\nphone: " $3 "\n<----"}'
+
